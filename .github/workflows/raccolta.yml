@@ -19,7 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
+      # Sempre l'ultima versione del ramo: una raccolta rimasta in coda
+      # partirebbe altrimenti dai dati di quando è stata richiesta
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -40,5 +44,6 @@ jobs:
             echo "Nessun dato nuovo."
           else
             git commit --quiet -m "Dati $(TZ=Europe/Rome date '+%Y-%m-%d %H:%M')"
+            git pull --rebase --quiet
             git push
           fi
