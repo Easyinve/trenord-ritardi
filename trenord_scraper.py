@@ -377,41 +377,55 @@ def esporta_archivio(db: sqlite3.Connection, cartella: Path, giorni: list[str]) 
 # ritardo. Per gli abbonamenti IVOL il calcolo è su tutte le direttrici insieme.
 SOGLIA_INDENNIZZO_PCT = 10.0
 RITARDO_INDENNIZZO_MIN = 15
-TUTTE = "TUTTE"
+TUTTE = "Tot"
 
+# Trenord pubblica ogni mese una tabella con l'"Indice" di ogni direttrice: è
+# la percentuale di corse soppresse, anche in parte, o arrivate con più di 15
+# minuti di ritardo. La tabella usa codici diversi da quelli dell'API: questa è
+# la corrispondenza, presa da www.trenord.it/store-api/directors/<codice>.
+CODICE_UFFICIALE = {
+    "D001": "01", "D002": "03", "D003": "04", "D004": "05", "D005": "06", "D006": "07",
+    "D007": "08", "D008": "09", "D009": "10", "D010": "11", "D011": "12", "D012": "15",
+    "D013": "16", "D014": "17", "D015": "18", "D016": "19", "D017": "20", "D018": "21",
+    "D019": "22", "D020": "23", "D021": "24", "D022": "25", "D023": "26", "D024": "27",
+    "D025": "28", "D026": "29", "D027": "40", "D028": "34", "D029": "35", "D030": "35",
+    "D031": "36", "D032": "31", "D033": "32", "D034": "30", "D035": "33", "D036": "37",
+    "D037": "50", "D038": "02", "D039": "13", "D040": "14", "D041": "39", "D042": "42",
+}
+# Nomi come nella tabella di Trenord
 DIRETTRICI = {
-    "D001": "Novara-Milano-Treviglio", "D002": "Domodossola-Gallarate-Milano",
-    "D003": "Porto Ceresio-Varese-Gallarate-Milano", "D004": "Luino-Gallarate-Milano",
-    "D005": "Chiasso-Como-Seregno-Milano", "D006": "Tirano-Sondrio-Lecco-Milano",
-    "D007": "Lecco-Molteno-Monza-Milano", "D008": "Chiavenna-Colico",
-    "D009": "Lecco-Molteno-Como", "D010": "Lecco-Bergamo-Brescia",
-    "D011": "Bergamo-Carnate-Milano", "D012": "Bergamo-Pioltello-Milano",
-    "D013": "Cremona-Treviglio", "D014": "Verona-Brescia-Treviglio-Milano",
-    "D015": "Brescia-Piadena-Parma", "D016": "Brescia-Cremona",
-    "D017": "Mantova-Cremona-Lodi-Milano", "D018": "Piacenza-Lodi-Milano",
-    "D019": "Alessandria-Voghera-Pavia-Milano", "D020": "Stradella-Pavia-Milano",
-    "D021": "Pavia-Codogno", "D022": "Alessandria-Mortara-Milano",
-    "D023": "Mortara-Novara", "D024": "Pavia-Torreberetti-Alessandria",
-    "D025": "Pavia-Mortara-Vercelli", "D026": "Voghera-Piacenza",
-    "D027": "Treviglio-Milano-Varese", "D028": "Brescia-Iseo-Edolo",
-    "D029": "Gallarate-Malpensa-Milano Centrale", "D030": "Malpensa-Milano Cadorna",
-    "D031": "Saronno-Milano-Lodi", "D032": "Como-Saronno-Milano",
-    "D033": "Novara-Saronno-Milano", "D034": "Laveno-Varese-Saronno-Milano",
-    "D035": "Asso-Seveso-Milano", "D036": "Mariano/Camnago-Seveso-Milano",
-    "D037": "Milano Rogoredo-Milano Bovisa", "D038": "Saronno-Seregno-Milano-Albairate",
-    "D039": "Seregno-Carnate", "D040": "Bergamo-Treviglio",
-    "D041": "Lecco-Carnate-Milano", "D042": "Malpensa-Varese-Mendrisio-Como",
-    "0": "Direttrice non indicata",
-    TUTTE: "Tutte le direttrici (abbonamenti IVOL)",
+    "01": "Novara-Milano-Treviglio", "02": "Saronno-Seregno-Milano-Albairate",
+    "03": "Domodossola-Gallarate-Milano", "04": "P.to Ceresio-Varese-Gallarate-Milano",
+    "05": "Luino-Gallarate-Milano", "06": "Chiasso-Como-Monza-Milano",
+    "07": "Tirano-Sondrio-Lecco-Milano", "08": "Lecco-Molteno-Monza-Milano",
+    "09": "Chiavenna-Colico", "10": "Lecco-Molteno-Como", "11": "Lecco-Bergamo-Brescia",
+    "12": "Bergamo-Carnate-Milano", "13": "Seregno-Carnate (fuori dalla tabella Trenord)",
+    "14": "Bergamo-Treviglio", "15": "Bergamo-Pioltello-Milano", "16": "Cremona-Treviglio",
+    "17": "Verona-Brescia-Treviglio-Milano", "18": "Brescia-Piadena-Parma",
+    "19": "Brescia-Cremona", "20": "Mantova-Cremona-Lodi-Milano", "21": "Piacenza-Lodi-Milano",
+    "22": "Alessandria-Pavia-Milano", "23": "Stradella-Pavia-Milano", "24": "Pavia-Codogno",
+    "25": "Alessandria-Mortara-Milano", "26": "Mortara-Novara",
+    "27": "Pavia-Torreberetti-Alessandria", "28": "Pavia-Mortara-Vercelli",
+    "29": "Voghera-Piacenza", "30": "Laveno-Varese-Saronno-Milano", "31": "Como-Saronno-Milano",
+    "32": "Novara-Saronno-Milano", "33": "Asso-Seveso-Milano", "34": "Brescia-Iseo-Edolo",
+    "35": "Malpensa-Milano", "36": "Saronno-Milano-Lodi (S1, S3, S12)",
+    "37": "Mariano/Camnago-Seveso-Milano (S2, S4)", "39": "Lecco-Carnate-Milano",
+    "40": "Treviglio-Milano Passante-Varese", "42": "Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",
+    "50": "Milano Rogoredo-Milano Bovisa (fuori dalla tabella Trenord)",
+    "n.d.": "Direttrice non indicata",
+    TUTTE: "Totale servizio Trenord (abbonamento IVOL)",
 }
 COLONNE_MENSILE = [
-    "mese", "direttrice", "nome", "giorni", "corse", "rilevate", "soppresse", "soppresse_in_parte",
-    "ritardo_oltre_15", "irregolari", "pct_irregolari", "copertura_pct", "indennizzo",
+    "mese", "cod_dir", "direttrice", "giorni", "corse", "rilevate", "soppresse", "soppresse_in_parte",
+    "ritardo_oltre_15", "irregolari", "indice", "copertura_pct", "indennizzo",
 ]
 
 
 def mensile(db: sqlite3.Connection, mese: str) -> list[dict]:
     """Una riga per direttrice, più una per il totale, per il mese AAAA-MM.
+
+    Le direttrici hanno codici e nomi della tabella mensile di Trenord, e
+    "indice" è calcolato come il suo "Indice".
 
     Una corsa è "rilevata" se si sa com'è finita: soppressa, anche in parte,
     oppure arrivata con un ritardo registrato. I treni ancora in viaggio non
@@ -420,7 +434,7 @@ def mensile(db: sqlite3.Connection, mese: str) -> list[dict]:
     """
     gruppi: dict[str, dict] = {}
     for r in db.execute("SELECT * FROM treni WHERE data LIKE ?", (mese + "-%",)):
-        for chiave in (r["direttrice"] or "n.d.", TUTTE):
+        for chiave in (CODICE_UFFICIALE.get(r["direttrice"], "n.d."), TUTTE):
             g = gruppi.setdefault(chiave, {
                 "giorni": set(), "corse": 0, "rilevate": 0, "soppresse": 0,
                 "soppresse_in_parte": 0, "ritardo_oltre_15": 0,
@@ -443,8 +457,8 @@ def mensile(db: sqlite3.Connection, mese: str) -> list[dict]:
         irregolari = g["soppresse"] + g["soppresse_in_parte"] + g["ritardo_oltre_15"]
         pct = round(100 * irregolari / g["rilevate"], 2) if g["rilevate"] else None
         righe.append({
-            "mese": mese, "direttrice": chiave, "nome": DIRETTRICI.get(chiave, ""),
-            **g, "giorni": len(g["giorni"]), "irregolari": irregolari, "pct_irregolari": pct,
+            "mese": mese, "cod_dir": chiave, "direttrice": DIRETTRICI.get(chiave, ""),
+            **g, "giorni": len(g["giorni"]), "irregolari": irregolari, "indice": pct,
             "copertura_pct": round(100 * g["rilevate"] / g["corse"], 1),
             "indennizzo": "" if pct is None else ("si" if pct >= SOGLIA_INDENNIZZO_PCT else "no"),
         })
@@ -457,7 +471,7 @@ def esporta_mensile(db: sqlite3.Connection, cartella: Path, mesi: set[str]) -> N
     vecchie = []
     if percorso.exists():
         with open(percorso, newline="", encoding="utf-8") as fh:
-            vecchie = [r for r in csv.DictReader(fh) if r["mese"] not in mesi]
+            vecchie = [r for r in csv.DictReader(fh) if r["mese"] not in mesi and "cod_dir" in r]
     nuove = []
     for mese in sorted(mesi):
         carica_archivio(db, cartella, sorted(f.stem for f in cartella.glob(f"{mese}-??.csv")))
@@ -465,7 +479,7 @@ def esporta_mensile(db: sqlite3.Connection, cartella: Path, mesi: set[str]) -> N
     with open(percorso, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, COLONNE_MENSILE, lineterminator="\n", extrasaction="ignore")
         w.writeheader()
-        w.writerows(sorted(vecchie + nuove, key=lambda r: (r["mese"], r["direttrice"] == TUTTE, r["direttrice"])))
+        w.writerows(sorted(vecchie + nuove, key=lambda r: (r["mese"], r["cod_dir"] == TUTTE, r["cod_dir"])))
 
 
 def stampa_mensile(mese: str, archivio: Path | None) -> None:
@@ -477,19 +491,19 @@ def stampa_mensile(mese: str, archivio: Path | None) -> None:
         print(f"Nessun dato per {mese}.")
         return
     totale = righe[-1]
-    print(f"\nTrenord, {mese}: corse soppresse o arrivate con più di {RITARDO_INDENNIZZO_MIN} minuti di ritardo")
-    print(f"Giorni raccolti: {totale['giorni']}. Soglia per l'indennizzo: {SOGLIA_INDENNIZZO_PCT:.0f}% delle corse.\n")
-    print(f"{'direttrice':<46}{'corse':>7}{'rilev.':>8}{'soppr.':>8}{'parz.':>7}{'>15 min':>9}{'%':>8}  indennizzo")
+    print(f"\nDettaglio del servizio Trenord, {mese}")
+    print(f"Indice: % di corse soppresse, anche in parte, o arrivate con più di {RITARDO_INDENNIZZO_MIN} minuti di ritardo.")
+    print(f"Indennizzo se l'Indice è almeno {SOGLIA_INDENNIZZO_PCT:.0f}%. Giorni raccolti: {totale['giorni']}.\n")
+    print(f"{'Cod':<5}{'Direttrice':<47}{'corse':>7}{'rilev.':>8}{'soppr.':>8}{'parz.':>7}{'>15 min':>9}{'Indice':>8}  Indennizzo")
     for r in righe:
-        if r["direttrice"] == TUTTE:
-            print("-" * 105)
-        nome = f"{r['direttrice']} {r['nome']}" if r["direttrice"] != TUTTE else r["nome"]
-        pct = "–" if r["pct_irregolari"] is None else f"{r['pct_irregolari']:.1f}".replace(".", ",")
-        esito = {"si": "SÌ", "no": "no"}.get(r["indennizzo"], "–")
-        print(f"{nome[:45]:<46}{r['corse']:>7}{r['rilevate']:>8}{r['soppresse']:>8}"
-              f"{r['soppresse_in_parte']:>7}{r['ritardo_oltre_15']:>9}{pct:>8}  {esito}")
+        if r["cod_dir"] == TUTTE:
+            print("-" * 111)
+        indice = "–" if r["indice"] is None else f"{r['indice']:.2f}".replace(".", ",")
+        esito = {"si": "SI", "no": "No"}.get(r["indennizzo"], "–")
+        print(f"{r['cod_dir']:<5}{r['direttrice'][:46]:<47}{r['corse']:>7}{r['rilevate']:>8}{r['soppresse']:>8}"
+              f"{r['soppresse_in_parte']:>7}{r['ritardo_oltre_15']:>9}{indice:>8}  {esito}")
     print(f"\nCorse con esito rilevato: {str(totale['copertura_pct']).replace('.', ',')}% del totale. "
-          "La percentuale è calcolata su queste.")
+          "L'Indice è calcolato su queste.")
     print("Stima su dati non ufficiali: l'elenco che dà diritto all'indennizzo è quello pubblicato da Trenord.")
 
 
