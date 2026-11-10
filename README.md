@@ -11,7 +11,7 @@ Raccoglie ogni mezz'ora lo stato dei treni Trenord e lo salva giorno per giorno.
 - L'elenco dei treni del giorno viene dal [feed GTFS di Trenord](https://www.dati.lombardia.it/d/3z4k-mxz9) sul portale open data di Regione Lombardia.
 - Lo stato di ogni treno viene dall'API pubblica usata dalla pagina "Circolazione in tempo reale" di trenord.it.
 
-La raccolta gira su GitHub Actions (`.github/workflows/raccolta.yml`). Lo script fa circa due richieste al secondo e si ferma se il sito risponde 403: in quel caso l'esecuzione risulta fallita.
+La raccolta gira su GitHub Actions (`.github/workflows/raccolta.yml`) ogni mezz'ora. Ogni treno viene interrogato una volta, una ventina di minuti dopo l'arrivo previsto, e una seconda volta due ore dopo se non risultava ancora arrivato: il sito tiene in cache ogni risposta per due ore, quindi chiedere più spesso non darebbe dati più freschi. Lo script fa circa due richieste al secondo e si ferma se il sito risponde 403: in quel caso l'esecuzione risulta fallita.
 
 ## Leggere i dati in locale
 
@@ -27,4 +27,4 @@ python3 trenord_scraper.py mensile --archivio archivio --mese 2026-11
 - Il riepilogo mensile è una stima: l'indennizzo spetta solo per le direttrici dell'elenco pubblicato da Trenord, calcolato su dati certificati. L'indice qui è calcolato sulle corse di cui si conosce l'esito, non su tutte quelle programmate, e Trenord non pubblica il dettaglio del suo calcolo.
 - L'API conserva i dati in tempo reale per circa tre ore dopo l'arrivo: se la raccolta salta per più di tre ore, i treni arrivati nel frattempo restano senza ritardo.
 - Un treno conta come cancellato per intero se tutte le fermate risultano soppresse, in parte se lo sono solo alcune.
-- Il ritardo è quello all'arrivo a destinazione; per i treni non ancora arrivati è l'ultimo rilevato.
+- Il ritardo è quello all'arrivo a destinazione. Durante la giornata compaiono solo i treni già arrivati da almeno venti minuti; quelli in viaggio o non ancora partiti restano senza dati finché non arrivano.

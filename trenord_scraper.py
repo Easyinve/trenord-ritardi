@@ -10,10 +10,17 @@ Come funziona
    stato, ritardo e fermate soppresse.
 3. I risultati finiscono in un database SQLite, una riga per treno e per giorno.
 
-L'API conserva i dati in tempo reale solo per circa tre ore dopo l'arrivo del
-treno: per avere la giornata completa bisogna quindi raccogliere più volte al
-giorno (`watch`, oppure `collect` lanciato da cron ogni 30 minuti). A ogni
-passaggio si interrogano solo i treni in circolazione in quel momento.
+Due vincoli decidono quando interrogare un treno:
+
+- l'API conserva i dati in tempo reale solo per circa tre ore dopo l'arrivo;
+- il sito tiene in cache ogni risposta per due ore, quindi chiedere lo stesso
+  treno più spesso restituisce sempre la stessa fotografia.
+
+Per questo ogni treno viene interrogato una volta sola, una ventina di minuti
+dopo l'arrivo previsto. Se a quel punto non risulta ancora arrivato lo si
+richiede una seconda volta due ore dopo, quando la cache è scaduta. La raccolta
+va lanciata ogni 30 minuti (`watch`, cron o GitHub Actions) e a ogni passaggio
+fa poche decine di richieste.
 
 Il sito blocca chi fa troppe richieste ravvicinate (risposta 403): lo script
 va piano di proposito, circa due richieste al secondo, e si ferma subito se
@@ -45,6 +52,7 @@ import sys
 import time
 import zipfile
 from datetime import date, datetime, timedelta
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -60,8 +68,9 @@ DB_PATH = CARTELLA / "trenord.sqlite"
 GTFS_PATH = CARTELLA / "gtfs_trenord.zip"
 
 PAUSA = 0.5           # secondi tra una richiesta e l'altra
-ANTICIPO_MIN = 20     # si inizia a seguire un treno 20 minuti prima della partenza
+ATTESA_ARRIVO_MIN = 20  # si interroga un treno 20 minuti dopo l'arrivo previsto
 SCADENZA_ORE = 3      # dopo l'arrivo previsto + 3 ore l'API non ha più i dati
+CACHE_MIN = 120       # il sito tiene in cache ogni risposta per due ore
 ATTESA_BLOCCO_MIN = 90  # in `watch`, pausa dopo un blocco del sito
 
 
@@ -93,7 +102,7 @@ CREATE TABLE IF NOT EXISTS treni (
     avvisi          TEXT,
     grezzo          TEXT,              -- risposta JSON, salvata solo per i casi anomali
     primo_rilevamento  TEXT,
-    ultimo_rilevamento TEXT,
+    ultimo_rilevamento TEXT,           -- momento a cui risale l'ultima risposta ricevuta
     PRIMARY KEY (data, codice)
 );
 """
@@ -195,8 +204,26 @@ _sessione = requests.Session()
 _sessione.headers["User-Agent"] = USER_AGENT
 
 
-def scarica_treno(numero: str) -> list | None:
-    """Risposta dell'API per un numero di treno; None se la richiesta fallisce."""
+def _momento_risposta(r: requests.Response) -> datetime:
+    """A quando risale davvero la risposta, che può arrivare dalla cache del sito.
+
+    L'intestazione Expires indica la scadenza della copia in cache: togliendo
+    la durata della cache si ottiene il momento in cui è stata generata.
+    """
+    try:
+        generata = parsedate_to_datetime(r.headers["Expires"]) - timedelta(minutes=CACHE_MIN)
+        if timedelta(0) <= adesso() - generata <= timedelta(minutes=CACHE_MIN + 5):
+            return generata.astimezone(ROMA)
+    except (KeyError, TypeError, ValueError):
+        pass
+    return adesso()
+
+
+def scarica_treno(numero: str) -> tuple[list, datetime] | None:
+    """Risposta dell'API per un numero di treno e momento a cui risale.
+
+    Restituisce None se la richiesta fallisce.
+    """
     for tentativo in range(3):
         try:
             r = _sessione.get(API_TRENO.format(numero=numero), timeout=20)
@@ -207,10 +234,10 @@ def scarica_treno(numero: str) -> list | None:
             raise Bloccato(f"risposta {r.status_code}")
         time.sleep(PAUSA)
         if r.status_code == 404:
-            return []
+            return [], adesso()
         if r.status_code == 200:
             try:
-                return r.json()
+                return r.json(), _momento_risposta(r)
             except ValueError:
                 return None
         time.sleep(5 * (tentativo + 1))
@@ -295,6 +322,10 @@ def salva(db: sqlite3.Connection, riga: dict, ora: str) -> None:
     # L'API dimentica i dati in tempo reale qualche ora dopo l'arrivo: una
     # risposta vuota non deve sovrascrivere quello che è già stato rilevato.
     if vecchia["ha_dati"] and not riga["ha_dati"]:
+        db.execute(
+            "UPDATE treni SET ultimo_rilevamento = ? WHERE data = ? AND codice = ?",
+            (ora, riga["data"], riga["codice"]),
+        )
         return
     if vecchia["ritardo_max"] is not None:
         riga["ritardo_max"] = max(vecchia["ritardo_max"], riga["ritardo_max"] or vecchia["ritardo_max"])
@@ -519,21 +550,25 @@ def da_interrogare(db: sqlite3.Connection, giorno: date, tutti: bool) -> list[st
     ora = adesso()
     minuti_ora = (ora.date() - giorno).days * 1440 + ora.hour * 60 + ora.minute
 
-    # corse con esito definitivo già registrato: (numero, partenza HH:MM)
-    chiuse = {
-        (r["numero"], (r["partenza_prev"] or "")[:5])
+    # corse già viste: (numero, partenza HH:MM) -> riga del database
+    viste = {
+        (r["numero"], (r["partenza_prev"] or "")[:5]): r
         for r in db.execute("SELECT * FROM treni WHERE data = ?", (giorno.isoformat(),))
-        if r["cancellato"] or (r["arrivato"] and r["ha_dati"])
     }
     scelti = []
     for numero, corse in previsti.items():
         for partenza, arrivo in corse:
-            hhmm = f"{partenza // 60 % 24:02d}:{partenza % 60:02d}"
-            if (numero, hhmm) in chiuse:
-                continue
-            if partenza - ANTICIPO_MIN <= minuti_ora <= arrivo + SCADENZA_ORE * 60:
-                scelti.append(numero)
-                break
+            if not arrivo + ATTESA_ARRIVO_MIN <= minuti_ora <= arrivo + SCADENZA_ORE * 60:
+                continue                    # troppo presto, o dati non più disponibili
+            r = viste.get((numero, f"{partenza // 60 % 24:02d}:{partenza % 60:02d}"))
+            if r is not None:
+                if r["cancellato"] or (r["arrivato"] and r["ha_dati"]):
+                    continue                # esito definitivo già registrato
+                ultima = datetime.fromisoformat(r["ultimo_rilevamento"])
+                if ora < ultima + timedelta(minutes=CACHE_MIN + 1):
+                    continue                # il sito darebbe ancora la stessa risposta
+            scelti.append(numero)
+            break
     return sorted(scelti, key=int)
 
 
@@ -551,17 +586,17 @@ def collect(tutti: bool = False, silenzioso: bool = False, archivio: Path | None
         print(f"[{ora:%H:%M}] {len(numeri)} treni da interrogare (circa {durata:.0f} min)…", flush=True)
 
     falliti = 0
-    marca = ora.isoformat(timespec="seconds")
     try:
         for i, numero in enumerate(numeri, 1):
-            risposta = scarica_treno(numero)
-            if risposta is None:
+            esito = scarica_treno(numero)
+            if esito is None:
                 falliti += 1
                 continue
+            risposta, momento = esito
             for corsa in risposta:
                 riga = leggi_corsa(corsa)
                 if riga:
-                    salva(db, riga, marca)
+                    salva(db, riga, momento.isoformat(timespec="seconds"))
             if i % 100 == 0:
                 db.commit()
                 if not silenzioso:
@@ -707,7 +742,7 @@ def main() -> None:
     sub = p.add_subparsers(dest="comando", required=True)
 
     c = sub.add_parser("collect", help="un passaggio di raccolta sui treni di oggi")
-    c.add_argument("--tutti", action="store_true", help="interroga tutti i treni del giorno (circa 2.500 richieste, 30 minuti)")
+    c.add_argument("--tutti", action="store_true", help="interroga subito tutti i treni del giorno (circa 2.500 richieste, 30 minuti); di norma non serve")
     c.add_argument("--silenzioso", action="store_true", help="nessun messaggio (utile con cron)")
     c.add_argument("--archivio", type=Path, metavar="CARTELLA", help="legge e riscrive i dati come CSV in questa cartella")
 
