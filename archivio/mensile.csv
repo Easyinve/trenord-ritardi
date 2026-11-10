@@ -3,7 +3,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,02,Saronno-Seregno-Milano-Albairate,1,135,27,0,0,0,0,0.0,20.0,no
 2026-11,03,Domodossola-Gallarate-Milano,1,46,9,0,0,0,0,0.0,19.6,no
 2026-11,04,P.to Ceresio-Varese-Gallarate-Milano,1,39,7,0,0,0,0,0.0,17.9,no
-2026-11,05,Luino-Gallarate-Milano,1,32,8,0,0,0,0,0.0,25.0,no
+2026-11,05,Luino-Gallarate-Milano,1,32,9,0,0,0,0,0.0,28.1,no
 2026-11,06,Chiasso-Como-Monza-Milano,1,109,24,0,0,1,1,4.17,22.0,no
 2026-11,07,Tirano-Sondrio-Lecco-Milano,1,73,13,0,0,0,0,0.0,17.8,no
 2026-11,08,Lecco-Molteno-Monza-Milano,1,66,14,0,0,0,0,0.0,21.2,no
@@ -16,7 +16,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,15,Bergamo-Pioltello-Milano,1,52,13,1,1,0,2,15.38,25.0,si
 2026-11,16,Cremona-Treviglio,1,36,9,0,0,0,0,0.0,25.0,no
 2026-11,17,Verona-Brescia-Treviglio-Milano,1,74,18,0,0,0,0,0.0,24.3,no
-2026-11,18,Brescia-Piadena-Parma,1,35,5,0,0,0,0,0.0,14.3,no
+2026-11,18,Brescia-Piadena-Parma,1,35,7,0,0,0,0,0.0,20.0,no
 2026-11,19,Brescia-Cremona,1,33,6,0,0,1,1,16.67,18.2,si
 2026-11,20,Mantova-Cremona-Lodi-Milano,1,39,7,0,0,0,0,0.0,17.9,no
 2026-11,21,Piacenza-Lodi-Milano,1,38,10,0,0,0,0,0.0,26.3,no
@@ -40,4 +40,4 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,40,Treviglio-Milano Passante-Varese,1,78,14,0,0,0,0,0.0,17.9,no
 2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",1,137,18,0,0,0,0,0.0,13.1,no
 2026-11,n.d.,Direttrice non indicata,1,5,0,0,0,0,0,,0.0,
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),1,2499,507,3,14,11,28,5.52,20.3,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),1,2499,510,3,14,11,28,5.49,20.4,no
