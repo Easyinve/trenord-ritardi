@@ -1,0 +1,4 @@
+# Database e file scaricati: si ricostruiscono dall'archivio CSV
+dati/
+__pycache__/
+.DS_Store
