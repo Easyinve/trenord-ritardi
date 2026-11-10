@@ -3,7 +3,7 @@ name: Raccolta Trenord
 on:
   schedule:
     # Ogni mezz'ora (orario UTC; GitHub può partire con qualche minuto di ritardo)
-    - cron: "7,37 * * * *"
+    - cron: "11,41 * * * *"
   workflow_dispatch:
 
 permissions:
