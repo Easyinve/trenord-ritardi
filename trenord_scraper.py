@@ -26,6 +26,7 @@ Uso
     python3 trenord_scraper.py report             # riepilogo di oggi
     python3 trenord_scraper.py report --date 2026-11-10 --csv treni.csv
     python3 trenord_scraper.py report --days 7    # una riga per giorno
+    python3 trenord_scraper.py mensile --mese 2026-11   # indennizzo per direttrice
 
 Con `--archivio CARTELLA` i dati vengono letti e riscritti anche come CSV, un
 file per giorno più `riepilogo.csv`: è il formato usato su GitHub Actions, dove
@@ -363,6 +364,133 @@ def esporta_archivio(db: sqlite3.Connection, cartella: Path, giorni: list[str]) 
         w = csv.DictWriter(fh, COLONNE_RIEPILOGO, lineterminator="\n", extrasaction="ignore")
         w.writeheader()
         w.writerows(tutti[g] for g in sorted(tutti))
+    if nuovi:
+        esporta_mensile(db, cartella, {g[:7] for g in nuovi})
+
+
+# --------------------------------------------------------------------------
+# Riepilogo mensile per direttrice (soglia per l'indennizzo agli abbonati)
+# --------------------------------------------------------------------------
+
+# L'indennizzo spetta se in un mese almeno il 10% delle corse di una direttrice
+# è stato soppresso, del tutto o in parte, o è arrivato con più di 15 minuti di
+# ritardo. Per gli abbonamenti IVOL il calcolo è su tutte le direttrici insieme.
+SOGLIA_INDENNIZZO_PCT = 10.0
+RITARDO_INDENNIZZO_MIN = 15
+TUTTE = "TUTTE"
+
+DIRETTRICI = {
+    "D001": "Novara-Milano-Treviglio", "D002": "Domodossola-Gallarate-Milano",
+    "D003": "Porto Ceresio-Varese-Gallarate-Milano", "D004": "Luino-Gallarate-Milano",
+    "D005": "Chiasso-Como-Seregno-Milano", "D006": "Tirano-Sondrio-Lecco-Milano",
+    "D007": "Lecco-Molteno-Monza-Milano", "D008": "Chiavenna-Colico",
+    "D009": "Lecco-Molteno-Como", "D010": "Lecco-Bergamo-Brescia",
+    "D011": "Bergamo-Carnate-Milano", "D012": "Bergamo-Pioltello-Milano",
+    "D013": "Cremona-Treviglio", "D014": "Verona-Brescia-Treviglio-Milano",
+    "D015": "Brescia-Piadena-Parma", "D016": "Brescia-Cremona",
+    "D017": "Mantova-Cremona-Lodi-Milano", "D018": "Piacenza-Lodi-Milano",
+    "D019": "Alessandria-Voghera-Pavia-Milano", "D020": "Stradella-Pavia-Milano",
+    "D021": "Pavia-Codogno", "D022": "Alessandria-Mortara-Milano",
+    "D023": "Mortara-Novara", "D024": "Pavia-Torreberetti-Alessandria",
+    "D025": "Pavia-Mortara-Vercelli", "D026": "Voghera-Piacenza",
+    "D027": "Treviglio-Milano-Varese", "D028": "Brescia-Iseo-Edolo",
+    "D029": "Gallarate-Malpensa-Milano Centrale", "D030": "Malpensa-Milano Cadorna",
+    "D031": "Saronno-Milano-Lodi", "D032": "Como-Saronno-Milano",
+    "D033": "Novara-Saronno-Milano", "D034": "Laveno-Varese-Saronno-Milano",
+    "D035": "Asso-Seveso-Milano", "D036": "Mariano/Camnago-Seveso-Milano",
+    "D037": "Milano Rogoredo-Milano Bovisa", "D038": "Saronno-Seregno-Milano-Albairate",
+    "D039": "Seregno-Carnate", "D040": "Bergamo-Treviglio",
+    "D041": "Lecco-Carnate-Milano", "D042": "Malpensa-Varese-Mendrisio-Como",
+    "0": "Direttrice non indicata",
+    TUTTE: "Tutte le direttrici (abbonamenti IVOL)",
+}
+COLONNE_MENSILE = [
+    "mese", "direttrice", "nome", "giorni", "corse", "rilevate", "soppresse", "soppresse_in_parte",
+    "ritardo_oltre_15", "irregolari", "pct_irregolari", "copertura_pct", "indennizzo",
+]
+
+
+def mensile(db: sqlite3.Connection, mese: str) -> list[dict]:
+    """Una riga per direttrice, più una per il totale, per il mese AAAA-MM.
+
+    Una corsa è "rilevata" se si sa com'è finita: soppressa, anche in parte,
+    oppure arrivata con un ritardo registrato. I treni ancora in viaggio non
+    contano finché non arrivano. La percentuale è calcolata sulle corse
+    rilevate, perché di quelle senza dati non si può dire se fossero regolari.
+    """
+    gruppi: dict[str, dict] = {}
+    for r in db.execute("SELECT * FROM treni WHERE data LIKE ?", (mese + "-%",)):
+        for chiave in (r["direttrice"] or "n.d.", TUTTE):
+            g = gruppi.setdefault(chiave, {
+                "giorni": set(), "corse": 0, "rilevate": 0, "soppresse": 0,
+                "soppresse_in_parte": 0, "ritardo_oltre_15": 0,
+            })
+            g["giorni"].add(r["data"])
+            g["corse"] += 1
+            giunto = r["ritardo"] is not None and (r["arrivato"] or r["stato"] == "A")
+            if r["cancellato"]:
+                g["soppresse"] += 1
+            elif r["fermate_cancellate"]:
+                g["soppresse_in_parte"] += 1
+            elif giunto and r["ritardo"] > RITARDO_INDENNIZZO_MIN:
+                g["ritardo_oltre_15"] += 1
+            if r["cancellato"] or r["fermate_cancellate"] or giunto:
+                g["rilevate"] += 1
+
+    righe = []
+    for chiave in sorted(gruppi, key=lambda k: (k == TUTTE, k)):
+        g = gruppi[chiave]
+        irregolari = g["soppresse"] + g["soppresse_in_parte"] + g["ritardo_oltre_15"]
+        pct = round(100 * irregolari / g["rilevate"], 2) if g["rilevate"] else None
+        righe.append({
+            "mese": mese, "direttrice": chiave, "nome": DIRETTRICI.get(chiave, ""),
+            **g, "giorni": len(g["giorni"]), "irregolari": irregolari, "pct_irregolari": pct,
+            "copertura_pct": round(100 * g["rilevate"] / g["corse"], 1),
+            "indennizzo": "" if pct is None else ("si" if pct >= SOGLIA_INDENNIZZO_PCT else "no"),
+        })
+    return righe
+
+
+def esporta_mensile(db: sqlite3.Connection, cartella: Path, mesi: set[str]) -> None:
+    """Aggiorna mensile.csv per i mesi indicati, rileggendo i CSV di quei mesi."""
+    percorso = cartella / "mensile.csv"
+    vecchie = []
+    if percorso.exists():
+        with open(percorso, newline="", encoding="utf-8") as fh:
+            vecchie = [r for r in csv.DictReader(fh) if r["mese"] not in mesi]
+    nuove = []
+    for mese in sorted(mesi):
+        carica_archivio(db, cartella, sorted(f.stem for f in cartella.glob(f"{mese}-??.csv")))
+        nuove += mensile(db, mese)
+    with open(percorso, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, COLONNE_MENSILE, lineterminator="\n", extrasaction="ignore")
+        w.writeheader()
+        w.writerows(sorted(vecchie + nuove, key=lambda r: (r["mese"], r["direttrice"] == TUTTE, r["direttrice"])))
+
+
+def stampa_mensile(mese: str, archivio: Path | None) -> None:
+    db = apri_db()
+    if archivio:
+        carica_archivio(db, archivio, sorted(f.stem for f in archivio.glob(f"{mese}-??.csv")))
+    righe = mensile(db, mese)
+    if not righe:
+        print(f"Nessun dato per {mese}.")
+        return
+    totale = righe[-1]
+    print(f"\nTrenord, {mese}: corse soppresse o arrivate con più di {RITARDO_INDENNIZZO_MIN} minuti di ritardo")
+    print(f"Giorni raccolti: {totale['giorni']}. Soglia per l'indennizzo: {SOGLIA_INDENNIZZO_PCT:.0f}% delle corse.\n")
+    print(f"{'direttrice':<46}{'corse':>7}{'rilev.':>8}{'soppr.':>8}{'parz.':>7}{'>15 min':>9}{'%':>8}  indennizzo")
+    for r in righe:
+        if r["direttrice"] == TUTTE:
+            print("-" * 105)
+        nome = f"{r['direttrice']} {r['nome']}" if r["direttrice"] != TUTTE else r["nome"]
+        pct = "–" if r["pct_irregolari"] is None else f"{r['pct_irregolari']:.1f}".replace(".", ",")
+        esito = {"si": "SÌ", "no": "no"}.get(r["indennizzo"], "–")
+        print(f"{nome[:45]:<46}{r['corse']:>7}{r['rilevate']:>8}{r['soppresse']:>8}"
+              f"{r['soppresse_in_parte']:>7}{r['ritardo_oltre_15']:>9}{pct:>8}  {esito}")
+    print(f"\nCorse con esito rilevato: {str(totale['copertura_pct']).replace('.', ',')}% del totale. "
+          "La percentuale è calcolata su queste.")
+    print("Stima su dati non ufficiali: l'elenco che dà diritto all'indennizzo è quello pubblicato da Trenord.")
 
 
 # --------------------------------------------------------------------------
@@ -579,6 +707,10 @@ def main() -> None:
     r.add_argument("--days", type=int, default=1, metavar="N", help="tabella degli ultimi N giorni fino a --date")
     r.add_argument("--archivio", type=Path, metavar="CARTELLA", help="carica prima i CSV di questa cartella")
 
+    m = sub.add_parser("mensile", help="corse irregolari per direttrice e soglia per l'indennizzo")
+    m.add_argument("--mese", default=adesso().strftime("%Y-%m"), help="mese AAAA-MM (default quello in corso)")
+    m.add_argument("--archivio", type=Path, metavar="CARTELLA", help="carica prima i CSV di questa cartella")
+
     a = p.parse_args()
     if a.comando == "collect":
         try:
@@ -587,6 +719,8 @@ def main() -> None:
             sys.exit(f"Il sito ha bloccato le richieste ({e}). Riprova più tardi, senza insistere.")
     elif a.comando == "watch":
         watch(a.every)
+    elif a.comando == "mensile":
+        stampa_mensile(a.mese, a.archivio)
     else:
         report(a.date, a.soglia, a.csv, a.days, a.archivio)
 
