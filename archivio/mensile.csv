@@ -37,7 +37,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,36,"Saronno-Milano-Lodi (S1, S3, S12)",2,221,193,0,1,1,2,1.04,87.3,no
 2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",2,142,127,1,0,0,1,0.79,89.4,no
 2026-11,39,Lecco-Carnate-Milano,2,76,64,0,0,0,0,0.0,84.2,no
-2026-11,40,Treviglio-Milano Passante-Varese,2,82,71,0,0,1,1,1.41,86.6,no
+2026-11,40,Treviglio-Milano Passante-Varese,2,83,72,0,0,1,1,1.39,86.7,no
 2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",2,145,93,0,0,0,0,0.0,64.1,no
 2026-11,n.d.,Direttrice non indicata,2,6,0,0,0,0,0,,0.0,
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),2,2589,2248,11,34,45,90,4.0,86.8,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),2,2590,2249,11,34,45,90,4.0,86.8,no
