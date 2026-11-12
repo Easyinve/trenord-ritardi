@@ -1,0 +1,2 @@
+data,codice,numero,linea,categoria,direttrice,origine,destinazione,partenza_prev,arrivo_prev,stato,cancellato,fermate,fermate_cancellate,ritardo,ritardo_max,arrivato,ha_dati,avvisi,primo_rilevamento,ultimo_rilevamento
+2026-11-13,125142,25142,S10,S10,D042,CHIASSO,BIASCA,22:54:00,00:07:00,V,0,4,0,1,5,1,1,,2026-11-13T00:31:30+01:00,2026-11-13T00:31:30+01:00
