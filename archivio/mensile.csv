@@ -1,43 +1,43 @@
 mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritardo_oltre_15,irregolari,indice,copertura_pct,indennizzo
-2026-11,01,Novara-Milano-Treviglio,5,326,312,4,4,8,16,5.13,95.7,no
-2026-11,02,Saronno-Seregno-Milano-Albairate,5,576,558,20,25,6,51,9.14,96.9,no
-2026-11,03,Domodossola-Gallarate-Milano,5,206,196,1,0,12,13,6.63,95.1,no
-2026-11,04,P.to Ceresio-Varese-Gallarate-Milano,5,174,168,0,0,7,7,4.17,96.6,no
-2026-11,05,Luino-Gallarate-Milano,5,141,135,1,0,11,12,8.89,95.7,no
-2026-11,06,Chiasso-Como-Monza-Milano,5,466,453,1,7,12,20,4.42,97.2,no
-2026-11,07,Tirano-Sondrio-Lecco-Milano,5,326,314,2,14,23,39,12.42,96.3,si
+2026-11,01,Novara-Milano-Treviglio,5,328,314,4,4,8,16,5.1,95.7,no
+2026-11,02,Saronno-Seregno-Milano-Albairate,5,578,560,20,25,6,51,9.11,96.9,no
+2026-11,03,Domodossola-Gallarate-Milano,5,207,197,1,0,12,13,6.6,95.2,no
+2026-11,04,P.to Ceresio-Varese-Gallarate-Milano,5,175,169,0,0,7,7,4.14,96.6,no
+2026-11,05,Luino-Gallarate-Milano,5,142,136,1,0,11,12,8.82,95.8,no
+2026-11,06,Chiasso-Como-Monza-Milano,5,469,455,1,7,12,20,4.4,97.0,no
+2026-11,07,Tirano-Sondrio-Lecco-Milano,5,327,315,2,14,23,39,12.38,96.3,si
 2026-11,08,Lecco-Molteno-Monza-Milano,5,300,292,5,4,7,16,5.48,97.3,no
-2026-11,09,Chiavenna-Colico,5,147,144,2,0,2,4,2.78,98.0,no
-2026-11,10,Lecco-Molteno-Como,5,102,101,0,2,0,2,1.98,99.0,no
+2026-11,09,Chiavenna-Colico,5,148,145,2,0,2,4,2.76,98.0,no
+2026-11,10,Lecco-Molteno-Como,5,104,103,0,2,0,2,1.94,99.0,no
 2026-11,11,Lecco-Bergamo-Brescia,5,318,307,0,6,12,18,5.86,96.5,no
-2026-11,12,Bergamo-Carnate-Milano,5,194,186,3,2,10,15,8.06,95.9,no
-2026-11,13,Seregno-Carnate (fuori dalla tabella Trenord),5,137,134,2,0,0,2,1.49,97.8,no
-2026-11,14,Bergamo-Treviglio,5,147,142,3,3,1,7,4.93,96.6,no
+2026-11,12,Bergamo-Carnate-Milano,5,196,188,3,2,10,15,7.98,95.9,no
+2026-11,13,Seregno-Carnate (fuori dalla tabella Trenord),5,138,135,2,0,0,2,1.48,97.8,no
+2026-11,14,Bergamo-Treviglio,5,148,143,3,3,1,7,4.9,96.6,no
 2026-11,15,Bergamo-Pioltello-Milano,5,180,175,4,6,10,20,11.43,97.2,si
-2026-11,16,Cremona-Treviglio,5,162,159,1,0,2,3,1.89,98.1,no
-2026-11,17,Verona-Brescia-Treviglio-Milano,5,329,319,1,3,28,32,10.03,97.0,si
-2026-11,18,Brescia-Piadena-Parma,5,160,155,0,8,13,21,13.55,96.9,si
-2026-11,19,Brescia-Cremona,5,149,144,0,0,3,3,2.08,96.6,no
+2026-11,16,Cremona-Treviglio,5,163,160,2,0,2,4,2.5,98.2,no
+2026-11,17,Verona-Brescia-Treviglio-Milano,5,332,322,1,3,28,32,9.94,97.0,no
+2026-11,18,Brescia-Piadena-Parma,5,161,156,0,8,13,21,13.46,96.9,si
+2026-11,19,Brescia-Cremona,5,151,146,0,0,3,3,2.05,96.7,no
 2026-11,20,Mantova-Cremona-Lodi-Milano,5,182,171,2,4,12,18,10.53,94.0,si
-2026-11,21,Piacenza-Lodi-Milano,5,166,162,2,6,8,16,9.88,97.6,no
-2026-11,22,Alessandria-Pavia-Milano,5,457,441,11,36,15,62,14.06,96.5,si
-2026-11,23,Stradella-Pavia-Milano,5,116,114,0,4,7,11,9.65,98.3,no
-2026-11,24,Pavia-Codogno,5,125,124,0,1,4,5,4.03,99.2,no
-2026-11,25,Alessandria-Mortara-Milano,5,213,205,0,0,12,12,5.85,96.2,no
+2026-11,21,Piacenza-Lodi-Milano,5,167,163,2,6,8,16,9.82,97.6,no
+2026-11,22,Alessandria-Pavia-Milano,5,459,443,11,36,15,62,14.0,96.5,si
+2026-11,23,Stradella-Pavia-Milano,5,117,115,0,4,7,11,9.57,98.3,no
+2026-11,24,Pavia-Codogno,5,126,125,0,1,4,5,4.0,99.2,no
+2026-11,25,Alessandria-Mortara-Milano,5,215,207,0,0,12,12,5.8,96.3,no
 2026-11,26,Mortara-Novara,5,45,44,1,0,1,2,4.55,97.8,no
-2026-11,27,Pavia-Torreberetti-Alessandria,5,131,128,2,3,1,6,4.69,97.7,no
-2026-11,28,Pavia-Mortara-Vercelli,5,139,130,2,6,7,15,11.54,93.5,si
+2026-11,27,Pavia-Torreberetti-Alessandria,5,132,129,2,3,1,6,4.65,97.7,no
+2026-11,28,Pavia-Mortara-Vercelli,5,140,131,2,6,7,15,11.45,93.6,si
 2026-11,29,Voghera-Piacenza,5,26,26,0,0,1,1,3.85,100.0,no
-2026-11,30,Laveno-Varese-Saronno-Milano,5,427,416,0,6,27,33,7.93,97.4,no
-2026-11,31,Como-Saronno-Milano,5,316,308,1,4,6,11,3.57,97.5,no
-2026-11,32,Novara-Saronno-Milano,5,166,162,0,1,5,6,3.7,97.6,no
-2026-11,33,Asso-Seveso-Milano,5,251,244,3,9,30,42,17.21,97.2,si
-2026-11,34,Brescia-Iseo-Edolo,5,304,293,4,9,21,34,11.6,96.4,si
-2026-11,35,Malpensa-Milano,5,669,638,3,21,9,33,5.17,95.4,no
-2026-11,36,"Saronno-Milano-Lodi (S1, S3, S12)",5,909,877,50,25,13,88,10.03,96.5,si
-2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",5,579,559,18,15,18,51,9.12,96.5,no
-2026-11,39,Lecco-Carnate-Milano,5,325,311,12,27,11,50,16.08,95.7,si
-2026-11,40,Treviglio-Milano Passante-Varese,5,346,326,2,9,8,19,5.83,94.2,no
-2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",5,628,427,4,2,5,11,2.58,68.0,no
+2026-11,30,Laveno-Varese-Saronno-Milano,5,430,419,0,6,27,33,7.88,97.4,no
+2026-11,31,Como-Saronno-Milano,5,317,309,1,4,6,11,3.56,97.5,no
+2026-11,32,Novara-Saronno-Milano,5,167,163,0,1,5,6,3.68,97.6,no
+2026-11,33,Asso-Seveso-Milano,5,253,246,3,9,30,42,17.07,97.2,si
+2026-11,34,Brescia-Iseo-Edolo,5,307,296,4,9,21,34,11.49,96.4,si
+2026-11,35,Malpensa-Milano,5,673,642,3,21,9,33,5.14,95.4,no
+2026-11,36,"Saronno-Milano-Lodi (S1, S3, S12)",5,913,881,50,25,13,88,9.99,96.5,no
+2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",5,581,561,18,15,18,51,9.09,96.6,no
+2026-11,39,Lecco-Carnate-Milano,5,327,313,12,27,11,50,15.97,95.7,si
+2026-11,40,Treviglio-Milano Passante-Varese,5,348,328,2,9,8,19,5.79,94.3,no
+2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",5,633,429,4,2,5,11,2.56,67.8,no
 2026-11,n.d.,Direttrice non indicata,5,43,31,1,0,1,2,6.45,72.1,no
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),5,11103,10531,168,272,389,829,7.87,94.8,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),5,11166,10590,169,272,389,830,7.84,94.8,no
