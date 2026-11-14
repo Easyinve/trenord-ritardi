@@ -1,0 +1,2 @@
+data,codice,numero,linea,categoria,direttrice,origine,destinazione,partenza_prev,arrivo_prev,stato,cancellato,fermate,fermate_cancellate,ritardo,ritardo_max,arrivato,ha_dati,avvisi,primo_rilevamento,ultimo_rilevamento
+2026-11-15,124576,24576,S5,S5,D027,TREVIGLIO,VARESE,21:10:00,23:21:00,A,0,19,0,-2,4,1,1,,2026-11-15T00:01:29+01:00,2026-11-15T00:01:29+01:00
