@@ -1,0 +1,3 @@
+data,codice,numero,linea,categoria,direttrice,origine,destinazione,partenza_prev,arrivo_prev,stato,cancellato,fermate,fermate_cancellate,ritardo,ritardo_max,arrivato,ha_dati,avvisi,primo_rilevamento,ultimo_rilevamento
+2026-11-17,125535,25535,RE_80,RE,D005,LOCARNO,MILANO CENTRALE,19:22:00,21:17:00,A,0,6,0,5,7,1,1,,2026-11-17T00:01:52+01:00,2026-11-17T00:01:52+01:00
+2026-11-17,125537,25537,RE_80,RE,D005,LOCARNO,MILANO CENTRALE,20:22:00,22:17:00,A,0,6,0,-1,3,1,1,,2026-11-17T00:01:53+01:00,2026-11-17T00:01:53+01:00
