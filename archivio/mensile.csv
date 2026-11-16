@@ -2,28 +2,28 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,01,Novara-Milano-Treviglio,7,436,422,4,4,8,16,3.79,96.8,no
 2026-11,02,Saronno-Seregno-Milano-Albairate,6,686,668,20,30,8,58,8.68,97.4,no
 2026-11,03,Domodossola-Gallarate-Milano,6,268,258,1,0,12,13,5.04,96.3,no
-2026-11,04,P.to Ceresio-Varese-Gallarate-Milano,6,225,219,0,0,7,7,3.2,97.3,no
-2026-11,05,Luino-Gallarate-Milano,6,183,177,1,0,12,13,7.34,96.7,no
+2026-11,04,P.to Ceresio-Varese-Gallarate-Milano,7,226,220,0,0,7,7,3.18,97.3,no
+2026-11,05,Luino-Gallarate-Milano,7,184,178,1,0,12,13,7.3,96.7,no
 2026-11,06,Chiasso-Como-Monza-Milano,7,585,561,1,7,15,23,4.1,95.9,no
-2026-11,07,Tirano-Sondrio-Lecco-Milano,7,431,417,5,15,27,47,11.27,96.8,si
-2026-11,08,Lecco-Molteno-Monza-Milano,6,370,362,7,8,7,22,6.08,97.8,no
+2026-11,07,Tirano-Sondrio-Lecco-Milano,7,432,418,5,15,27,47,11.24,96.8,si
+2026-11,08,Lecco-Molteno-Monza-Milano,7,371,363,7,8,7,22,6.06,97.8,no
 2026-11,09,Chiavenna-Colico,6,190,187,2,0,2,4,2.14,98.4,no
 2026-11,10,Lecco-Molteno-Como,5,115,114,0,2,0,2,1.75,99.1,no
 2026-11,11,Lecco-Bergamo-Brescia,6,415,404,0,7,12,19,4.7,97.3,no
 2026-11,12,Bergamo-Carnate-Milano,6,251,243,3,2,12,17,7.0,96.8,no
 2026-11,13,Seregno-Carnate (fuori dalla tabella Trenord),5,150,147,2,0,0,2,1.36,98.0,no
-2026-11,14,Bergamo-Treviglio,6,191,186,3,3,2,8,4.3,97.4,no
-2026-11,15,Bergamo-Pioltello-Milano,7,233,228,4,6,10,20,8.77,97.9,no
+2026-11,14,Bergamo-Treviglio,7,192,187,3,3,2,8,4.28,97.4,no
+2026-11,15,Bergamo-Pioltello-Milano,7,234,229,4,6,10,20,8.73,97.9,no
 2026-11,16,Cremona-Treviglio,6,208,205,2,0,2,4,1.95,98.6,no
-2026-11,17,Verona-Brescia-Treviglio-Milano,7,439,429,1,3,28,32,7.46,97.7,no
+2026-11,17,Verona-Brescia-Treviglio-Milano,7,440,430,1,3,28,32,7.44,97.7,no
 2026-11,18,Brescia-Piadena-Parma,6,200,196,0,10,13,23,11.73,98.0,si
 2026-11,19,Brescia-Cremona,6,190,184,0,0,3,3,1.63,96.8,no
 2026-11,20,Mantova-Cremona-Lodi-Milano,6,229,219,2,4,13,19,8.68,95.6,no
 2026-11,21,Piacenza-Lodi-Milano,7,211,207,2,6,8,16,7.73,98.1,no
-2026-11,22,Alessandria-Pavia-Milano,6,603,577,11,36,16,63,10.92,95.7,si
+2026-11,22,Alessandria-Pavia-Milano,7,604,578,11,36,16,63,10.9,95.7,si
 2026-11,23,Stradella-Pavia-Milano,6,152,150,0,4,7,11,7.33,98.7,no
 2026-11,24,Pavia-Codogno,6,160,159,2,3,4,9,5.66,99.4,no
-2026-11,25,Alessandria-Mortara-Milano,7,271,260,0,0,13,13,5.0,95.9,no
+2026-11,25,Alessandria-Mortara-Milano,7,272,261,0,0,13,13,4.98,96.0,no
 2026-11,26,Mortara-Novara,6,54,53,1,0,1,2,3.77,98.1,no
 2026-11,27,Pavia-Torreberetti-Alessandria,6,161,158,2,3,3,8,5.06,98.1,no
 2026-11,28,Pavia-Mortara-Vercelli,6,170,161,2,6,7,15,9.32,94.7,no
@@ -31,13 +31,13 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,30,Laveno-Varese-Saronno-Milano,7,518,508,0,6,29,35,6.89,98.1,no
 2026-11,31,Como-Saronno-Milano,7,386,377,1,4,6,11,2.92,97.7,no
 2026-11,32,Novara-Saronno-Milano,7,211,206,0,1,5,6,2.91,97.6,no
-2026-11,33,Asso-Seveso-Milano,6,305,299,3,9,31,43,14.38,98.0,si
+2026-11,33,Asso-Seveso-Milano,7,306,300,3,9,31,43,14.33,98.0,si
 2026-11,34,Brescia-Iseo-Edolo,6,401,384,4,9,22,35,9.11,95.8,no
-2026-11,35,Malpensa-Milano,7,887,861,3,21,10,34,3.95,97.1,no
-2026-11,36,"Saronno-Milano-Lodi (S1, S3, S12)",7,1134,1102,50,25,14,89,8.08,97.2,no
+2026-11,35,Malpensa-Milano,7,890,864,3,21,10,34,3.94,97.1,no
+2026-11,36,"Saronno-Milano-Lodi (S1, S3, S12)",7,1136,1104,50,25,14,89,8.06,97.2,no
 2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",7,682,662,19,15,18,52,7.85,97.1,no
-2026-11,39,Lecco-Carnate-Milano,6,394,382,12,29,11,52,13.61,97.0,si
+2026-11,39,Lecco-Carnate-Milano,7,395,383,12,29,11,52,13.58,97.0,si
 2026-11,40,Treviglio-Milano Passante-Varese,7,460,441,2,13,8,23,5.22,95.9,no
-2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",7,796,491,4,2,5,11,2.24,61.7,no
+2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",7,798,493,4,2,5,11,2.23,61.8,no
 2026-11,n.d.,Direttrice non indicata,7,54,36,1,0,1,2,5.56,66.7,no
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),7,14035,13330,177,293,413,883,6.62,95.0,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),7,14053,13348,177,293,413,883,6.62,95.0,no
