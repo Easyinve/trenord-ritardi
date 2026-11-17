@@ -1,0 +1,2 @@
+data,codice,numero,linea,categoria,direttrice,origine,destinazione,partenza_prev,arrivo_prev,stato,cancellato,fermate,fermate_cancellate,ritardo,ritardo_max,arrivato,ha_dati,avvisi,primo_rilevamento,ultimo_rilevamento
+2026-11-18,102648,2648,RE_6,RE,D014,VERONA PORTA NUOVA,MILANO LAMBRATE,21:43:00,23:26:00,A,0,11,0,-1,5,1,1,,2026-11-18T00:01:38+01:00,2026-11-18T00:01:38+01:00
