@@ -263,6 +263,17 @@ def scarica_treno(numero: str) -> tuple[list, datetime] | None:
 
 def leggi_corsa(corsa: dict) -> dict | None:
     """Trasforma una corsa della risposta API in una riga per il database."""
+    def _mezzanotte(minuti) -> int:
+        # A cavallo della mezzanotte il sito conta a volte il giorno sbagliato:
+        # un treno delle 00:06 arrivato 3 minuti prima risulta in ritardo di
+        # 1437 minuti. Nessun treno ha 12 ore di ritardo, quindi si corregge.
+        minuti = int(minuti)
+        if minuti > 720:
+            return minuti - 1440
+        if minuti < -720:
+            return minuti + 1440
+        return minuti
+
     tratte = corsa.get("journey_list") or []
     if not tratte:
         return None
@@ -276,11 +287,13 @@ def leggi_corsa(corsa: dict) -> dict | None:
         reale = p.get("actual_data") or {}
         for chiave in ("arr_delay_actual", "dep_delay_actual"):
             if isinstance(reale.get(chiave), (int, float)):
-                ritardi.append(int(reale[chiave]))
+                ritardi.append(_mezzanotte(reale[chiave]))
 
     arrivo = (fermate[-1].get("actual_data") or {}).get("arr_delay_actual")
     arrivato = isinstance(arrivo, (int, float))
-    ritardo = int(arrivo) if arrivato else treno.get("delay")
+    ritardo = _mezzanotte(arrivo) if arrivato else treno.get("delay")
+    if isinstance(ritardo, (int, float)):
+        ritardo = _mezzanotte(ritardo)
     if ritardo is None and ritardi:
         ritardo = ritardi[-1]
 

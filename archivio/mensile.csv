@@ -29,7 +29,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,28,Pavia-Mortara-Vercelli,10,287,276,2,6,7,15,5.43,96.2,no
 2026-11,29,Voghera-Piacenza,9,51,48,0,0,1,1,2.08,94.1,no
 2026-11,30,Laveno-Varese-Saronno-Milano,10,877,864,3,9,45,57,6.6,98.5,no
-2026-11,31,Como-Saronno-Milano,10,662,651,2,8,11,21,3.23,98.3,no
+2026-11,31,Como-Saronno-Milano,10,662,651,2,8,9,19,2.92,98.3,no
 2026-11,32,Novara-Saronno-Milano,10,349,343,2,1,9,12,3.5,98.3,no
 2026-11,33,Asso-Seveso-Milano,10,517,509,5,13,35,53,10.41,98.5,si
 2026-11,34,Brescia-Iseo-Edolo,10,652,631,10,13,32,55,8.72,96.8,no
@@ -40,4 +40,4 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,40,Treviglio-Milano Passante-Varese,10,744,725,6,16,13,35,4.83,97.4,no
 2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",10,1303,871,11,6,7,24,2.76,66.8,no
 2026-11,n.d.,Direttrice non indicata,10,62,38,1,0,1,2,5.26,61.3,no
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),10,23363,22448,339,453,626,1418,6.32,96.1,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),10,23363,22448,339,453,624,1416,6.31,96.1,no
