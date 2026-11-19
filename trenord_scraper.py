@@ -66,6 +66,10 @@ ROMA = ZoneInfo("Europe/Rome")
 CARTELLA = Path(__file__).resolve().parent / "dati"
 DB_PATH = CARTELLA / "trenord.sqlite"
 GTFS_PATH = CARTELLA / "gtfs_trenord.zip"
+# Copia di riserva tenuta nel repository: su GitHub la cartella dati/ riparte
+# vuota a ogni esecuzione, e se il portale della Regione non risponde serve
+# comunque un orario da cui partire.
+GTFS_RISERVA = Path(__file__).resolve().parent / "riserva" / "gtfs_trenord.zip"
 
 PAUSA = 0.5           # secondi tra una richiesta e l'altra
 ATTESA_ARRIVO_MIN = 20  # si interroga un treno 20 minuti dopo l'arrivo previsto
@@ -124,21 +128,34 @@ def apri_db() -> sqlite3.Connection:
 # Elenco dei treni del giorno (GTFS)
 # --------------------------------------------------------------------------
 
-def scarica_gtfs(forza: bool = False) -> None:
-    """Scarica il GTFS se manca o se ha più di un giorno."""
+def scarica_gtfs(forza: bool = False) -> Path:
+    """Scarica il GTFS se manca o se ha più di un giorno e dice quale file usare.
+
+    Se il portale non risponde usa la copia già scaricata o, in mancanza,
+    quella di riserva nel repository. Ogni download riuscito aggiorna la
+    riserva, se il contenuto è cambiato.
+    """
     CARTELLA.mkdir(parents=True, exist_ok=True)
     recente = GTFS_PATH.exists() and time.time() - GTFS_PATH.stat().st_mtime < 86400
     if recente and not forza:
-        return
+        return GTFS_PATH
     try:
         r = requests.get(GTFS_URL, headers={"User-Agent": USER_AGENT}, timeout=120)
         r.raise_for_status()
         zipfile.ZipFile(io.BytesIO(r.content)).testzip()
         GTFS_PATH.write_bytes(r.content)
-    except Exception as e:  # se il portale non risponde si usa la copia vecchia
-        if not GTFS_PATH.exists():
-            raise SystemExit(f"Impossibile scaricare il GTFS di Trenord: {e}")
-        print(f"Attenzione: GTFS non aggiornato ({e}), uso la copia salvata.", file=sys.stderr)
+        if GTFS_RISERVA.parent.is_dir() and (
+            not GTFS_RISERVA.exists() or GTFS_RISERVA.read_bytes() != r.content
+        ):
+            GTFS_RISERVA.write_bytes(r.content)
+        return GTFS_PATH
+    except Exception as e:  # se il portale non risponde si usa una copia vecchia
+        for copia in (GTFS_PATH, GTFS_RISERVA):
+            if copia.exists():
+                print(f"Attenzione: GTFS non scaricabile ({e}), uso la copia {copia}.",
+                      file=sys.stderr)
+                return copia
+        raise SystemExit(f"Impossibile scaricare il GTFS di Trenord: {e}")
 
 
 def _minuti(hhmmss: str) -> int:
@@ -158,9 +175,9 @@ def treni_del_giorno(giorno: date) -> dict[str, list[list[int]]]:
     if cache.exists():
         return json.loads(cache.read_text())
 
-    scarica_gtfs()
+    gtfs = scarica_gtfs()
     aaaammgg = giorno.strftime("%Y%m%d")
-    with zipfile.ZipFile(GTFS_PATH) as z:
+    with zipfile.ZipFile(gtfs) as z:
         with z.open("calendar_dates.txt") as f:
             servizi = {
                 r["service_id"]
