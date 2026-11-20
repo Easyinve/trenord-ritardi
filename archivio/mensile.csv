@@ -4,7 +4,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,03,Domodossola-Gallarate-Milano,11,472,460,3,2,13,18,3.91,97.5,no
 2026-11,04,P.to Ceresio-Varese-Gallarate-Milano,11,398,392,5,0,13,18,4.59,98.5,no
 2026-11,05,Luino-Gallarate-Milano,11,324,310,3,0,23,26,8.39,95.7,no
-2026-11,06,Chiasso-Como-Monza-Milano,11,1069,1044,7,14,21,42,4.02,97.7,no
+2026-11,06,Chiasso-Como-Monza-Milano,11,1069,1043,7,14,21,42,4.03,97.6,no
 2026-11,07,Tirano-Sondrio-Lecco-Milano,11,755,737,7,21,34,62,8.41,97.6,no
 2026-11,08,Lecco-Molteno-Monza-Milano,11,672,661,10,8,11,29,4.39,98.4,no
 2026-11,09,Chiavenna-Colico,11,337,334,2,0,4,6,1.8,99.1,no
@@ -13,7 +13,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,12,Bergamo-Carnate-Milano,11,442,434,7,2,13,22,5.07,98.2,no
 2026-11,13,Seregno-Carnate (fuori dalla tabella Trenord),10,287,284,4,0,2,6,2.11,99.0,no
 2026-11,14,Bergamo-Treviglio,11,342,337,8,5,5,18,5.34,98.5,no
-2026-11,15,Bergamo-Pioltello-Milano,11,474,460,10,12,18,40,8.7,97.0,no
+2026-11,15,Bergamo-Pioltello-Milano,11,474,459,10,12,18,40,8.71,96.8,no
 2026-11,16,Cremona-Treviglio,11,370,366,3,2,6,11,3.01,98.9,no
 2026-11,17,Verona-Brescia-Treviglio-Milano,11,763,753,3,4,34,41,5.44,98.7,no
 2026-11,18,Brescia-Piadena-Parma,11,359,355,2,14,20,36,10.14,98.9,si
@@ -31,7 +31,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,30,Laveno-Varese-Saronno-Milano,11,950,937,3,9,45,57,6.08,98.6,no
 2026-11,31,Como-Saronno-Milano,11,718,705,3,8,9,20,2.84,98.2,no
 2026-11,32,Novara-Saronno-Milano,11,378,370,2,1,9,12,3.24,97.9,no
-2026-11,33,Asso-Seveso-Milano,11,559,550,5,13,37,55,10.0,98.4,si
+2026-11,33,Asso-Seveso-Milano,11,559,551,5,13,38,56,10.16,98.6,si
 2026-11,34,Brescia-Iseo-Edolo,11,703,682,13,17,40,70,10.26,97.0,si
 2026-11,35,Malpensa-Milano,11,1532,1502,6,36,10,52,3.46,98.0,no
 2026-11,36,"Saronno-Milano-Lodi (S1, S3, S12)",11,2077,2034,113,68,34,215,10.57,97.9,si
@@ -40,4 +40,4 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,40,Treviglio-Milano Passante-Varese,11,800,780,6,16,13,35,4.49,97.5,no
 2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",11,1413,955,13,8,7,28,2.93,67.6,no
 2026-11,n.d.,Direttrice non indicata,11,64,39,1,0,1,2,5.13,60.9,no
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),11,25242,24278,362,482,661,1505,6.2,96.2,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),11,25242,24277,362,482,662,1506,6.2,96.2,no
