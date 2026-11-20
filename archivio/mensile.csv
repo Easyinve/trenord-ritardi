@@ -18,7 +18,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,17,Verona-Brescia-Treviglio-Milano,10,713,703,3,4,34,41,5.83,98.6,no
 2026-11,18,Brescia-Piadena-Parma,11,334,330,2,14,19,35,10.61,98.8,si
 2026-11,19,Brescia-Cremona,10,314,308,1,0,5,6,1.95,98.1,no
-2026-11,20,Mantova-Cremona-Lodi-Milano,10,382,362,2,7,25,34,9.39,94.8,no
+2026-11,20,Mantova-Cremona-Lodi-Milano,11,383,363,2,7,26,35,9.64,94.8,no
 2026-11,21,Piacenza-Lodi-Milano,10,350,343,6,9,18,33,9.62,98.0,no
 2026-11,22,Alessandria-Pavia-Milano,10,989,960,24,52,29,105,10.94,97.1,si
 2026-11,23,Stradella-Pavia-Milano,10,250,247,1,6,17,24,9.72,98.8,no
@@ -29,7 +29,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,28,Pavia-Mortara-Vercelli,10,287,276,2,6,7,15,5.43,96.2,no
 2026-11,29,Voghera-Piacenza,9,51,48,0,0,1,1,2.08,94.1,no
 2026-11,30,Laveno-Varese-Saronno-Milano,11,880,867,3,9,45,57,6.57,98.5,no
-2026-11,31,Como-Saronno-Milano,11,665,654,2,8,9,19,2.91,98.3,no
+2026-11,31,Como-Saronno-Milano,11,666,654,2,8,9,19,2.91,98.2,no
 2026-11,32,Novara-Saronno-Milano,11,350,343,2,1,9,12,3.5,98.0,no
 2026-11,33,Asso-Seveso-Milano,10,517,509,5,13,35,53,10.41,98.5,si
 2026-11,34,Brescia-Iseo-Edolo,10,652,631,10,13,32,55,8.72,96.8,no
@@ -38,6 +38,6 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",11,1194,1169,26,22,39,87,7.44,97.9,no
 2026-11,39,Lecco-Carnate-Milano,10,664,651,15,35,15,65,9.98,98.0,no
 2026-11,40,Treviglio-Milano Passante-Varese,10,750,731,6,16,13,35,4.79,97.5,no
-2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",11,1309,877,11,6,7,24,2.74,67.0,no
+2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",11,1311,878,11,6,7,24,2.73,67.0,no
 2026-11,n.d.,Direttrice non indicata,10,62,38,1,0,1,2,5.26,61.3,no
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),11,23437,22520,340,453,627,1420,6.31,96.1,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),11,23441,22522,340,453,628,1421,6.31,96.1,no
