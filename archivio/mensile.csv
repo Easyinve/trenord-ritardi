@@ -18,7 +18,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,17,Verona-Brescia-Treviglio-Milano,12,787,777,3,4,35,42,5.41,98.7,no
 2026-11,18,Brescia-Piadena-Parma,11,367,363,2,14,21,37,10.19,98.9,si
 2026-11,19,Brescia-Cremona,11,347,341,1,0,6,7,2.05,98.3,no
-2026-11,20,Mantova-Cremona-Lodi-Milano,12,423,402,2,9,27,38,9.45,95.0,no
+2026-11,20,Mantova-Cremona-Lodi-Milano,12,424,403,2,9,27,38,9.43,95.0,no
 2026-11,21,Piacenza-Lodi-Milano,11,388,381,7,9,21,37,9.71,98.2,no
 2026-11,22,Alessandria-Pavia-Milano,12,1092,1060,27,56,34,117,11.04,97.1,si
 2026-11,23,Stradella-Pavia-Milano,11,276,273,1,6,21,28,10.26,98.9,si
@@ -33,11 +33,11 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,32,Novara-Saronno-Milano,11,386,380,2,1,9,12,3.16,98.4,no
 2026-11,33,Asso-Seveso-Milano,12,574,565,6,13,38,57,10.09,98.4,si
 2026-11,34,Brescia-Iseo-Edolo,11,718,697,13,18,40,71,10.19,97.1,si
-2026-11,35,Malpensa-Milano,12,1578,1542,8,39,10,57,3.7,97.7,no
-2026-11,36,"Saronno-Milano-Lodi (S1, S3, S12)",12,2134,2087,119,69,35,223,10.69,97.8,si
-2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",12,1327,1302,26,26,39,91,6.99,98.1,no
+2026-11,35,Malpensa-Milano,12,1579,1542,8,39,10,57,3.7,97.7,no
+2026-11,36,"Saronno-Milano-Lodi (S1, S3, S12)",12,2136,2089,119,69,35,223,10.67,97.8,si
+2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",12,1329,1304,26,26,39,91,6.98,98.1,no
 2026-11,39,Lecco-Carnate-Milano,12,737,721,16,36,16,68,9.43,97.8,no
-2026-11,40,Treviglio-Milano Passante-Varese,12,827,806,6,16,13,35,4.34,97.5,no
+2026-11,40,Treviglio-Milano Passante-Varese,12,829,808,6,16,13,35,4.33,97.5,no
 2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",12,1444,974,14,8,7,29,2.98,67.5,no
-2026-11,n.d.,Direttrice non indicata,11,67,40,1,0,1,2,5.0,59.7,no
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),12,25924,24931,378,493,690,1561,6.26,96.2,no
+2026-11,n.d.,Direttrice non indicata,12,68,40,1,0,1,2,5.0,58.8,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),12,25933,24938,378,493,690,1561,6.26,96.2,no
