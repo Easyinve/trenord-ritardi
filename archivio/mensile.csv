@@ -33,11 +33,11 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,32,Novara-Saronno-Milano,11,386,380,2,1,9,12,3.16,98.4,no
 2026-11,33,Asso-Seveso-Milano,12,574,565,6,13,38,57,10.09,98.4,si
 2026-11,34,Brescia-Iseo-Edolo,11,718,697,13,18,40,71,10.19,97.1,si
-2026-11,35,Malpensa-Milano,12,1579,1542,8,39,10,57,3.7,97.7,no
+2026-11,35,Malpensa-Milano,12,1580,1543,8,39,10,57,3.69,97.7,no
 2026-11,36,"Saronno-Milano-Lodi (S1, S3, S12)",12,2137,2089,119,69,35,223,10.67,97.8,si
 2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",12,1329,1304,26,26,39,91,6.98,98.1,no
 2026-11,39,Lecco-Carnate-Milano,12,737,721,16,36,16,68,9.43,97.8,no
 2026-11,40,Treviglio-Milano Passante-Varese,12,829,808,6,16,13,35,4.33,97.5,no
 2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",12,1445,974,14,8,7,29,2.98,67.4,no
 2026-11,n.d.,Direttrice non indicata,12,68,40,1,0,1,2,5.0,58.8,no
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),12,25936,24939,378,493,690,1561,6.26,96.2,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),12,25937,24940,378,493,690,1561,6.26,96.2,no
