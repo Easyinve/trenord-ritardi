@@ -15,7 +15,7 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,14,Bergamo-Treviglio,11,349,343,9,5,5,19,5.54,98.3,no
 2026-11,15,Bergamo-Pioltello-Milano,12,484,474,10,12,19,41,8.65,97.9,no
 2026-11,16,Cremona-Treviglio,11,379,375,3,2,8,13,3.47,98.9,no
-2026-11,17,Verona-Brescia-Treviglio-Milano,12,787,777,3,4,35,42,5.41,98.7,no
+2026-11,17,Verona-Brescia-Treviglio-Milano,12,788,778,3,4,35,42,5.4,98.7,no
 2026-11,18,Brescia-Piadena-Parma,11,367,363,2,14,21,37,10.19,98.9,si
 2026-11,19,Brescia-Cremona,11,347,341,1,0,6,7,2.05,98.3,no
 2026-11,20,Mantova-Cremona-Lodi-Milano,12,424,403,2,9,27,38,9.43,95.0,no
@@ -38,6 +38,6 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",12,1329,1304,26,26,39,91,6.98,98.1,no
 2026-11,39,Lecco-Carnate-Milano,12,737,721,16,36,16,68,9.43,97.8,no
 2026-11,40,Treviglio-Milano Passante-Varese,12,829,808,6,16,13,35,4.33,97.5,no
-2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",12,1444,974,14,8,7,29,2.98,67.5,no
+2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",12,1445,974,14,8,7,29,2.98,67.4,no
 2026-11,n.d.,Direttrice non indicata,12,68,40,1,0,1,2,5.0,58.8,no
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),12,25933,24938,378,493,690,1561,6.26,96.2,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),12,25935,24939,378,493,690,1561,6.26,96.2,no
