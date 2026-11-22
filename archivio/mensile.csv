@@ -3,8 +3,8 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,02,Saronno-Seregno-Milano-Albairate,13,1476,1453,29,98,15,142,9.77,98.4,no
 2026-11,03,Domodossola-Gallarate-Milano,13,571,534,5,2,15,22,4.12,93.5,no
 2026-11,04,P.to Ceresio-Varese-Gallarate-Milano,13,480,456,5,2,13,20,4.39,95.0,no
-2026-11,05,Luino-Gallarate-Milano,13,389,363,3,0,25,28,7.71,93.3,no
-2026-11,06,Chiasso-Como-Monza-Milano,13,1243,1174,8,14,21,43,3.66,94.4,no
+2026-11,05,Luino-Gallarate-Milano,13,390,364,3,0,25,28,7.69,93.3,no
+2026-11,06,Chiasso-Como-Monza-Milano,13,1244,1175,8,14,21,43,3.66,94.5,no
 2026-11,07,Tirano-Sondrio-Lecco-Milano,13,912,868,11,21,36,68,7.83,95.2,no
 2026-11,08,Lecco-Molteno-Monza-Milano,13,793,749,12,8,12,32,4.27,94.5,no
 2026-11,09,Chiavenna-Colico,13,405,385,3,0,8,11,2.86,95.1,no
@@ -33,11 +33,11 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,32,Novara-Saronno-Milano,13,448,442,22,1,12,35,7.92,98.7,no
 2026-11,33,Asso-Seveso-Milano,13,656,648,33,14,41,88,13.58,98.8,si
 2026-11,34,Brescia-Iseo-Edolo,13,851,823,33,27,42,102,12.39,96.7,si
-2026-11,35,Malpensa-Milano,13,1866,1826,60,90,18,168,9.2,97.9,no
+2026-11,35,Malpensa-Milano,13,1866,1827,60,90,18,168,9.2,97.9,no
 2026-11,36,"Saronno-Milano-Lodi (S1, S3, S12)",13,2422,2372,149,108,36,293,12.35,97.9,si
-2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",13,1460,1435,58,32,39,129,8.99,98.3,no
+2026-11,37,"Mariano/Camnago-Seveso-Milano (S2, S4)",13,1461,1436,58,32,39,129,8.98,98.3,no
 2026-11,39,Lecco-Carnate-Milano,13,841,799,20,36,17,73,9.14,95.0,no
 2026-11,40,Treviglio-Milano Passante-Varese,13,973,920,9,17,16,42,4.57,94.6,no
 2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",13,1584,1048,18,24,7,49,4.68,66.2,no
 2026-11,n.d.,Direttrice non indicata,13,104,47,1,0,1,2,4.26,45.2,no
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),13,29842,28125,697,676,742,2115,7.52,94.2,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),13,29845,28129,697,676,742,2115,7.52,94.3,no
