@@ -1,7 +1,7 @@
 mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritardo_oltre_15,irregolari,indice,copertura_pct,indennizzo
-2026-11,01,Novara-Milano-Treviglio,16,1141,1099,8,12,22,42,3.82,96.3,no
+2026-11,01,Novara-Milano-Treviglio,16,1142,1100,8,12,22,42,3.82,96.3,no
 2026-11,02,Saronno-Seregno-Milano-Albairate,16,1884,1861,40,102,18,160,8.6,98.8,no
-2026-11,03,Domodossola-Gallarate-Milano,16,711,673,5,2,19,26,3.86,94.7,no
+2026-11,03,Domodossola-Gallarate-Milano,16,711,674,5,2,20,27,4.01,94.8,no
 2026-11,04,P.to Ceresio-Varese-Gallarate-Milano,16,597,573,6,3,17,26,4.54,96.0,no
 2026-11,05,Luino-Gallarate-Milano,16,486,457,3,0,33,36,7.88,94.0,no
 2026-11,06,Chiasso-Como-Monza-Milano,16,1574,1503,9,14,23,46,3.06,95.5,no
@@ -15,10 +15,10 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,14,Bergamo-Treviglio,16,508,484,10,5,6,21,4.34,95.3,no
 2026-11,15,Bergamo-Pioltello-Milano,16,714,693,10,18,26,54,7.79,97.1,no
 2026-11,16,Cremona-Treviglio,16,551,525,6,3,11,20,3.81,95.3,no
-2026-11,17,Verona-Brescia-Treviglio-Milano,16,1149,1104,12,13,51,76,6.88,96.1,no
+2026-11,17,Verona-Brescia-Treviglio-Milano,16,1150,1105,12,13,51,76,6.88,96.1,no
 2026-11,18,Brescia-Piadena-Parma,16,532,507,4,16,28,48,9.47,95.3,no
 2026-11,19,Brescia-Cremona,16,505,481,3,2,6,11,2.29,95.2,no
-2026-11,20,Mantova-Cremona-Lodi-Milano,16,614,572,4,12,33,49,8.57,93.2,no
+2026-11,20,Mantova-Cremona-Lodi-Milano,16,614,572,4,11,34,49,8.57,93.2,no
 2026-11,21,Piacenza-Lodi-Milano,16,559,538,9,10,23,42,7.81,96.2,no
 2026-11,22,Alessandria-Pavia-Milano,16,1592,1505,36,66,37,139,9.24,94.5,no
 2026-11,23,Stradella-Pavia-Milano,16,402,389,2,8,24,34,8.74,96.8,no
@@ -40,4 +40,4 @@ mese,cod_dir,direttrice,giorni,corse,rilevate,soppresse,soppresse_in_parte,ritar
 2026-11,40,Treviglio-Milano Passante-Varese,16,1208,1154,14,24,26,64,5.55,95.5,no
 2026-11,42,"Malpensa-Varese-Mendrisio-Como (S10, S40, S50)",16,1993,1356,25,27,10,62,4.57,68.0,no
 2026-11,n.d.,Direttrice non indicata,16,123,53,1,0,1,2,3.77,43.1,no
-2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),16,37360,35493,769,799,891,2459,6.93,95.0,no
+2026-11,Tot,Totale servizio Trenord (abbonamento IVOL),16,37362,35496,769,798,893,2460,6.93,95.0,no
